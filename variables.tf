@@ -210,7 +210,7 @@ variable "firewall_map" {
 }
 
 // Firewall Policy Rule Collection Group
-variable "priority" {
+variable "firewall_policy_rule_collection_group_priority" {
   description = "(Required) The priority of the Firewall Policy Rule Collection Group. The range is 100-65000."
   type        = number
 }

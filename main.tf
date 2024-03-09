@@ -65,7 +65,7 @@ module "firewall_policy_rule_collection_group" {
 
   name                        = local.firewall_policy_rule_collection_group_name
   firewall_policy_id          = module.firewall_policy.id
-  priority                    = var.priority
+  priority                    = var.firewall_policy_rule_collection_group_priority
   application_rule_collection = var.application_rule_collection
   network_rule_collection     = var.network_rule_collection
   nat_rule_collection         = local.nat_rule_collection
