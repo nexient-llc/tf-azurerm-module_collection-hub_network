@@ -19,11 +19,10 @@ locals {
   firewall_policy_rule_collection_group_name = module.resource_names["fw_plcy_rule_colln_grp"].standard
   custom_diagnostic_settings_name            = module.resource_names["custom_diagnostic_settings"].standard
 
-  location                   = var.location != null ? replace(trimspace(var.location), " ", "") : "eastus"
-  firewall_public_ip_address = module.firewall.public_ip_addresses["hubfirewall"][0]
+  location = var.location != null ? replace(trimspace(var.location), " ", "") : "eastus"
 
   network_map = {
-    for key, value in var.network_map : key => merge(value, {
+    "hub_network" = merge(var.network, {
       resource_group_name = local.resource_group_name
       location            = var.location
       vnet_name           = local.virtual_network_name
@@ -31,7 +30,7 @@ locals {
   }
 
   firewall_map = {
-    for key, value in var.firewall_map : key => merge(value, {
+    "hub_firewall" = merge(var.firewall, {
       client_name                     = var.logical_product_family
       stack                           = var.logical_product_service
       resource_group_name             = local.resource_group_name
@@ -49,25 +48,29 @@ locals {
 
   }
 
+  firewall_public_ip_addresses = module.firewall.public_ip_addresses["hub_firewall"]
+
   nat_rule_collection = var.nat_rule_collection != null ? [
     for collection in var.nat_rule_collection : {
       name     = collection.name
       action   = collection.action
       priority = collection.priority
-      rule = [
-        for rule in collection.rule : {
-          name                = rule.name
-          description         = rule.description
-          protocols           = rule.protocols
-          source_addresses    = rule.source_addresses
-          source_ip_groups    = rule.source_ip_groups
-          destination_ports   = rule.destination_ports
-          translated_address  = rule.translated_address
-          translated_port     = rule.translated_port
-          translated_fqdn     = rule.translated_fqdn
-          destination_address = local.firewall_public_ip_address
-        }
-      ]
+      rule = flatten([
+        for ip in local.firewall_public_ip_addresses : [
+          for rule in collection.rule : {
+            name                = rule.name
+            description         = rule.description
+            protocols           = rule.protocols
+            source_addresses    = rule.source_addresses
+            source_ip_groups    = rule.source_ip_groups
+            destination_ports   = rule.destination_ports
+            translated_address  = rule.translated_address
+            translated_port     = rule.translated_port
+            translated_fqdn     = rule.translated_fqdn
+            destination_address = ip
+          }
+        ]
+      ])
     }
   ] : []
 }

@@ -55,7 +55,6 @@ variable "resource_names_map" {
   }
 }
 
-
 variable "instance_env" {
   type        = number
   description = "Number that represents the instance of the environment."
@@ -123,13 +122,13 @@ variable "class_env" {
 }
 
 //networking module
-variable "network_map" {
-  description = "Map of spoke networks where vnet name is key, and value is object containing attributes to create a network"
-  type = map(object({
+variable "network" {
+  description = "Attributes of virtual network to be created."
+  type = object({
     use_for_each    = bool
     address_space   = optional(list(string), ["10.0.0.0/16"])
-    subnet_names    = optional(list(string), ["subnet1", "subnet2", "subnet3"])
-    subnet_prefixes = optional(list(string), ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"])
+    subnet_names    = optional(list(string), [])
+    subnet_prefixes = optional(list(string), [])
     bgp_community   = optional(string, null)
     ddos_protection_plan = optional(object(
       {
@@ -147,7 +146,7 @@ variable "network_map" {
     tags                                                  = optional(map(string), {})
     tracing_tags_enabled                                  = optional(bool, false)
     tracing_tags_prefix                                   = optional(string, "")
-  }))
+  })
 }
 
 variable "location" {
@@ -155,9 +154,10 @@ variable "location" {
   type        = string
 }
 
-variable "firewall_map" {
-  description = "Map of azure firewalls where name is key, and value is object containing attributes to create a azure firewall"
-  type = map(object({
+//Firewall module
+variable "firewall" {
+  description = "Attributes to create a azure firewall"
+  type = object({
     logs_destinations_ids = list(string)
     subnet_cidr           = optional(string)
     additional_public_ips = optional(list(object(
@@ -205,8 +205,8 @@ variable "firewall_map" {
     public_ip_zones = optional(list(number))
     sku_tier        = string
     zones           = optional(list(number))
-  }))
-  default = {}
+  })
+  default = null
 }
 
 // Firewall Policy Rule Collection Group

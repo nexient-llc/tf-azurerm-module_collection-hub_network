@@ -12,25 +12,25 @@
 
 output "resource_group" {
   description = "Attributes of the resource group created for the hub VNet"
-  value       = module.resource_group
+  value       = module.hub_vnet.resource_group
 }
 
 output "network" {
   description = "Attributes of the hub VNet"
-  value       = module.network
+  value       = module.hub_vnet.network
 }
 
 output "firewall" {
   description = "Attributes of the firewall created for the hub VNet"
-  value       = module.firewall
+  value       = module.hub_vnet.firewall
 }
 
 output "firewall_policy" {
   description = "Attributes of the firewall policy created for the hub VNet"
-  value       = module.firewall_policy
+  value       = module.hub_vnet.firewall_policy
 }
 
 output "firewall_policy_rule_collection_group" {
   description = "Attributes of the firewall policy rule collection created for the hub VNet"
-  value       = module.firewall_policy_rule_collection_group
+  value       = module.hub_vnet.firewall_policy_rule_collection_group
 }

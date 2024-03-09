@@ -21,8 +21,8 @@ module "hub_vnet" {
   instance_resource       = var.instance_resource
   location                = var.location
 
-  network_map                                    = var.network_map
-  firewall_map                                   = var.firewall_map
+  network                                        = var.network
+  firewall                                       = var.firewall
   firewall_policy_rule_collection_group_priority = var.firewall_policy_rule_collection_group_priority
   application_rule_collection                    = var.application_rule_collection
   network_rule_collection                        = var.network_rule_collection

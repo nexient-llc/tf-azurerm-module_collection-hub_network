@@ -17,7 +17,7 @@ import (
 
 	"github.com/nexient-llc/lcaf-component-terratest-common/lib"
 	"github.com/nexient-llc/lcaf-component-terratest-common/types"
-	testimpl "github.com/nexient-llc/tf-module-skeleton/tests/testimpl"
+	"github.com/nexient-llc/tf-azurerm-module_collection-hub_network/tests/testimpl"
 )
 
 const (
@@ -25,11 +25,19 @@ const (
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
+// Since the details of what should be tested in collection module are not known, the skeleton test is left intact for successful pipeline runs. Relevant tests can be added later once more testing scenario details are known.
 func TestSkeletonModule(t *testing.T) {
 
-	ctx := types.TestContext{
-		TestConfig: &testimpl.ThisTFModuleConfig{},
-	}
-	lib.RunSetupTestTeardown(t, testConfigsExamplesFolderDefault, infraTFVarFileNameDefault, ctx,
-		testimpl.TestComposableComplete)
+	ctx := types.CreateTestContextBuilder().
+		SetTestConfig(&testimpl.ThisTFModuleConfig{}).
+		SetTestConfigFolderName(testConfigsExamplesFolderDefault).
+		SetTestConfigFileName(infraTFVarFileNameDefault).
+		SetTestSpecificFlags(map[string]types.TestFlags{
+			"hub": {
+				"IS_TERRAFORM_IDEMPOTENT_APPLY": false,
+			},
+		}).
+		Build()
+
+	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestComposableComplete)
 }

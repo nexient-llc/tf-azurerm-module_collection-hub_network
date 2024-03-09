@@ -11,7 +11,7 @@
 // limitations under the License.
 
 module "resource_names" {
-  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.1.0"
+  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.1.1"
 
   for_each = var.resource_names_map
 
