@@ -26,7 +26,7 @@ const (
 )
 
 // Since the details of what should be tested in collection module are not known, the skeleton test is left intact for successful pipeline runs. Relevant tests can be added later once more testing scenario details are known.
-func TestSkeletonModule(t *testing.T) {
+func TestHubCollectionModule(t *testing.T) {
 
 	ctx := types.CreateTestContextBuilder().
 		SetTestConfig(&testimpl.ThisTFModuleConfig{}).

@@ -19,7 +19,6 @@ locals {
   firewall_policy_rule_collection_group_name = module.resource_names["fw_plcy_rule_colln_grp"].standard
   custom_diagnostic_settings_name            = module.resource_names["custom_diagnostic_settings"].standard
 
-  location = var.location != null ? replace(trimspace(var.location), " ", "") : "eastus"
 
   network_map = {
     "hub_network" = merge(var.network, {
@@ -34,8 +33,8 @@ locals {
       client_name                     = var.logical_product_family
       stack                           = var.logical_product_service
       resource_group_name             = local.resource_group_name
-      location                        = local.location
-      location_short                  = local.location
+      location                        = var.location
+      location_short                  = var.location
       environment                     = var.class_env
       vnet_name                       = local.virtual_network_name
       ip_configuration_name           = local.ip_configuration_name
