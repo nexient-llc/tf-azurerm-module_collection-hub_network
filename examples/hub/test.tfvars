@@ -61,54 +61,52 @@ firewall = {
 
 firewall_policy_rule_collection_group_priority = 100
 application_rule_collection                    = []
-# network_rule_collection = [
-#   {
-#     name     = "network-filter-collection"
-#     action   = "Allow"
-#     priority = 200
-#     rule = [
-#       {
-#         name                  = "allowhttps-ib-ntc"
-#         source_addresses      = ["*"]
-#         destination_ports     = ["443"]
-#         destination_addresses = ["172.16.1.0/24"] //module to be deployed after spokes are ready
-#         protocols             = ["TCP"]
-#       },
-#       {
-#         name                  = "allowhttps-ob-ntc"
-#         source_addresses      = ["172.16.1.0/24"]
-#         destination_ports     = ["443"]
-#         destination_addresses = ["*"]
-#         protocols             = ["TCP"]
-#     }]
-#   }
-# ]
-# nat_rule_collection = [
-#   {
-#     name     = "nat-rule-collection"
-#     action   = "Dnat"
-#     priority = 100
-#     rule = [
-#       {
-#         name               = "allowrdp-ib-nc"
-#         description        = "allowrdp-ib-nc"
-#         protocols          = ["TCP"]
-#         source_addresses   = ["*"]
-#         destination_ports  = ["3389"]
-#         translated_address = "172.16.1.4"
-#         translated_port    = "3389"
-#       },
-#       {
-#         name               = "allowhttp-ib-nc"
-#         description        = "allowhttp-ib-nc"
-#         protocols          = ["TCP"]
-#         source_addresses   = ["*"]
-#         destination_ports  = ["8080"]
-#         translated_address = "172.16.1.4"
-#         translated_port    = "8080"
-#       }
-#     ]
-#   }
-# ]
-network_rule_collection = []
-nat_rule_collection     = []
+network_rule_collection = [
+  {
+    name     = "network-filter-collection"
+    action   = "Allow"
+    priority = 200
+    rule = [
+      {
+        name                  = "allowhttps-ib-ntc"
+        source_addresses      = ["*"]
+        destination_ports     = ["443"]
+        destination_addresses = ["172.16.1.0/24"] //module to be deployed after spokes are ready
+        protocols             = ["TCP"]
+      },
+      {
+        name                  = "allowhttps-ob-ntc"
+        source_addresses      = ["172.16.1.0/24"]
+        destination_ports     = ["443"]
+        destination_addresses = ["*"]
+        protocols             = ["TCP"]
+    }]
+  }
+]
+nat_rule_collection = [
+  {
+    name     = "nat-rule-collection"
+    action   = "Dnat"
+    priority = 100
+    rule = [
+      {
+        name               = "allowrdp-ib-nc"
+        description        = "allowrdp-ib-nc"
+        protocols          = ["TCP"]
+        source_addresses   = ["*"]
+        destination_ports  = ["3389"]
+        translated_address = "172.16.1.4"
+        translated_port    = "3389"
+      },
+      {
+        name               = "allowhttp-ib-nc"
+        description        = "allowhttp-ib-nc"
+        protocols          = ["TCP"]
+        source_addresses   = ["*"]
+        destination_ports  = ["8080"]
+        translated_address = "172.16.1.4"
+        translated_port    = "8080"
+      }
+    ]
+  }
+]
