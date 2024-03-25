@@ -10,27 +10,97 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-output "resource_group" {
-  description = "Attributes of the resource group created for the hub VNet"
-  value       = module.hub_vnet.resource_group
+output "resource_group_id" {
+  value       = module.hub_vnet.resource_group_id
+  description = "Resource group id"
 }
 
-output "network" {
-  description = "Attributes of the hub VNet"
-  value       = module.hub_vnet.network
+output "resource_group_name" {
+  value       = module.hub_vnet.resource_group_name
+  description = "Resource group name"
 }
 
-output "firewall" {
-  description = "Attributes of the firewall created for the hub VNet"
-  value       = module.hub_vnet.firewall
+output "vnet_names" {
+  value       = module.hub_vnet.vnet_names
+  description = "Map of vnet names where key in input key in network map and value is name of vnet that got created."
 }
 
-output "firewall_policy" {
-  description = "Attributes of the firewall policy created for the hub VNet"
-  value       = module.hub_vnet.firewall_policy
+output "vnet_ids" {
+  value       = module.hub_vnet.vnet_ids
+  description = "Map of vnet names where key in input key in network map and value is id of vnet that got created."
 }
 
-output "firewall_policy_rule_collection_group" {
-  description = "Attributes of the firewall policy rule collection created for the hub VNet"
-  value       = module.hub_vnet.firewall_policy_rule_collection_group
+output "vnet_subnets" {
+  value       = module.hub_vnet.vnet_subnets
+  description = "Map of vnet names where key in input key in network map and value is id of the subnets that got created."
+}
+
+output "vnet_locations" {
+  value       = module.hub_vnet.vnet_locations
+  description = "Map of vnet names where key in input key in network map and value is location of vnet that got created."
+}
+
+output "vnet_address_spaces" {
+  value       = module.hub_vnet.vnet_address_spaces
+  description = "Map of vnet names where key in input key in network map and value is address of vnet that got created."
+}
+
+output "vnet_subnet_name_id_map" {
+  value       = module.hub_vnet.vnet_subnet_name_id_map
+  description = "Outputs a subnet name to ID map for each Vnet"
+}
+
+output "firewall_ids" {
+  value       = module.hub_vnet.firewall_ids
+  description = "Firewall generated ids"
+}
+
+output "firewall_names" {
+  value       = module.hub_vnet.firewall_names
+  description = "Firewall names"
+}
+
+output "firewall_private_ip_addresses" {
+  value       = module.hub_vnet.firewall_private_ip_addresses
+  description = "Firewall private IPs"
+}
+
+output "firewall_public_ip_addresses" {
+  value       = module.hub_vnet.firewall_public_ip_addresses
+  description = "Firewall public IPs"
+}
+
+output "firewall_subnet_ids" {
+  value       = module.hub_vnet.firewall_subnet_ids
+  description = "IDs of the subnet attached to the firewall"
+}
+
+output "firewall_policy_id" {
+  value       = module.hub_vnet.firewall_policy_id
+  description = "The ID of the Firewall Policy."
+}
+
+output "firewall_policy_child_policies" {
+  value       = module.hub_vnet.firewall_policy_child_policies
+  description = "The child policies of the Firewall Policy."
+}
+
+output "firewall_policy_firewalls" {
+  value       = module.hub_vnet.firewall_policy_firewalls
+  description = "A list of references to Azure Firewalls that this Firewall Policy is associated with."
+}
+
+output "firewall_policy_name" {
+  description = "The name of the Firewall Policy."
+  value       = module.hub_vnet.firewall_policy_name
+}
+
+output "firewall_policy_rule_collection_group_name" {
+  value       = module.hub_vnet.firewall_policy_rule_collection_group_name
+  description = "Value of the Azure Firewall policy rule collection group name"
+}
+
+output "firewall_policy_rule_collection_group_id" {
+  value       = module.hub_vnet.firewall_policy_rule_collection_group_id
+  description = "The ID of the Firewall Policy Rule Collection Group."
 }
