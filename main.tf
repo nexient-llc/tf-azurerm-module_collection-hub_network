@@ -11,11 +11,11 @@
 // limitations under the License.
 
 module "resource_names" {
-  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.1.0"
+  source = "git::https://github.com/nexient-llc/tf-module-resource_name.git?ref=1.1.1"
 
   for_each = var.resource_names_map
 
-  region                  = join("", split("-", local.location))
+  region                  = join("", split("-", var.location))
   class_env               = var.class_env
   cloud_resource_type     = each.value.name
   instance_env            = var.instance_env
@@ -55,7 +55,7 @@ module "firewall_policy" {
 
   name                = local.firewall_policy_name
   resource_group_name = local.resource_group_name
-  location            = local.location
+  location            = var.location
 
   depends_on = [module.network]
 }

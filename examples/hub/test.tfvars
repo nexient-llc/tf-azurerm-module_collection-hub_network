@@ -46,24 +46,21 @@ resource_names_map = {
     max_length = 80
   }
 }
-network_map = {
-  "hubnetwork" = {
-    use_for_each    = false
-    address_space   = ["10.0.0.0/16"]
-    subnet_names    = []
-    subnet_prefixes = []
-  }
+network = {
+  use_for_each    = false
+  address_space   = ["10.0.0.0/16"]
+  subnet_names    = []
+  subnet_prefixes = []
 }
-firewall_map = {
-  "hubfirewall" = {
-    logs_destinations_ids = []
-    subnet_cidr           = "10.0.1.0/24"
-    additional_public_ips = []
-    sku_tier              = "Standard"
-  }
+firewall = {
+  logs_destinations_ids = []
+  subnet_cidr           = "10.0.1.0/24"
+  additional_public_ips = []
+  sku_tier              = "Standard"
 }
-priority                    = 100
-application_rule_collection = []
+
+firewall_policy_rule_collection_group_priority = 100
+application_rule_collection                    = []
 network_rule_collection = [
   {
     name     = "network-filter-collection"
